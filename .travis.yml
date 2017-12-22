@@ -7,6 +7,7 @@ deploy:
   provider: rubygems
   api_key:
     secure: PmmHPxfXZEJ4Tr0clcWhO6+r70CNeOVg44V3bBuIp9OGC6scyaqnwrzn1SMloI8r7Hi6g2OB58Q4XgiC5omU7EjArdt1gP0lI1CcXZcU5dyHn+egYsmr0gyW//yWU36xD10/mtmJo920Waei0Le6R0x22TMAO0i3V+2S2vnT99fuMxSaL3pYoMehLssdqhrFVa6Yy6/HW/9+2T9N7EaF4yFqxttVLnoDHxp8xOwWMD32x4mn3+xjuTyVH6X2XJf6NGXU+zZ+6STuyXEkOVhP+x69pbQzsosSlx0R8viX5UcNZxcucbB4t4Zu6Da9Irfba7272mghqxhwZuEZ6x5NsjG7UEV6bnGPpBC5UcqFrSctqAlwNT71t6QiYYS7LTwGHzVOdC6hV/l5FmAKWlh/ijtaip5XTtC0muA+gO6nKupw2vSXYuVqQmbu/Bm5X9CyJusz3efCBEdf9aUO4gZJlNuYxYN+yAetAK0zh1IvSqZo1z+7aVECRwDxxzIhJXMhtjNPHTNPXBf+qO01BHgSNVWq/eU9PZB+AkH3RudnXcKRVi9fNAXyy3fiOzjc5xCWFYs4Q5eeR3Sp/CtqLjeNgCSL1PROrS3Oy9kJ+iK+8oSouHtBuAvU1YEV5iVEA6LzoOYhTdFlBYRWyJfDls2+xo2a6Hq06B+P4+6ZJXHqApk=
+  gemspec: lib-bootp.gemspec
   gem: lib-bootp
   on:
     tags: true
