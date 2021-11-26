@@ -15,7 +15,6 @@ module Lib
 
         def_delegators :@hlen, :to_s, :to_i
 
-
         def initialize(hlen=6)
           @hlen = hlen.to_i
         end

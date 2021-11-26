@@ -14,7 +14,7 @@ require 'lib/bootp/packet/ip_address'
 require 'lib/bootp/packet/server_host_name'
 require 'lib/bootp/packet/boot_file'
 require 'lib/bootp/packet/client_hardware_address'
-
+require 'json'
 
 module Lib
   module BOOTP
@@ -166,6 +166,30 @@ module Lib
         file = Lib::BOOTP::Packet::BootFile.unpack file
 
         self.new(op:op, htype:htype, hlen:hlen, hops:hops, xid:xid, secs:secs, flags:flags, ciaddr:ciaddr, yiaddr:yiaddr, siaddr:siaddr, giaddr:giaddr, chaddr:chaddr, sname:sname, file:file)
+      end
+
+      def to_json
+        to_h.to_json
+      end
+
+      def self.from_json(json)
+        json = JSON.parse json
+        Lib::BOOTP::Packet.new(
+          op: json['op']['code'].to_i,
+          htype: json['htype']['code'].to_i,
+          hlen: json['hlen'].to_i,
+          hops: json['hops'].to_i,
+          xid: json['xid'].to_i,
+          secs: json['secs'].to_i,
+          flags: json['flags'].to_i,
+          ciaddr: json['ciaddr'],
+          yiaddr: json['yiaddr'],
+          siaddr: json['siaddr'],
+          giaddr: json['giaddr'],
+          chaddr: json['chaddr'],
+          sname: json['sname'],
+          file: json['file']
+        )
       end
 
     end
