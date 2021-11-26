@@ -3,6 +3,7 @@
 # Copyright 14.03.2016 by Piotr Wojcieszonek
 
 require 'forwardable'
+require 'json'
 #require 'comparable'
 
 module Lib
@@ -26,6 +27,17 @@ module Lib
           elsif @op == 2
             'BOOTREPLY'
           end
+        end
+
+        def to_json(*params)
+          self.to_h.to_json
+        end
+
+        def to_h
+          {
+            code: @op.to_s,
+            name: self.to_s
+          }
         end
 
         def <=>(other)

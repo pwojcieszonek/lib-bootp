@@ -53,6 +53,17 @@ module Lib
           end
         end
 
+        def to_json(*params)
+          self.to_h.to_json
+        end
+
+        def to_h
+          {
+            code: @htype.to_s,
+            name: self.to_s
+          }
+        end
+
         def <=>(other)
           case other
             when String
