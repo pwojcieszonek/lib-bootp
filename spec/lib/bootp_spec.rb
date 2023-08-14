@@ -52,13 +52,13 @@ RSpec.describe Lib::BOOTP do
       expect(JSON.parse(@bootp.to_json)["flags"]).to eq "0x0"
     end
     it "should return ciaddr in json array" do
-      expect(JSON.parse(@bootp.to_json)["ciaddr"]).to eq "0.0.0.0"
+      expect(JSON.parse(@bootp.to_json)["ciaddr"]['address']).to eq "0.0.0.0"
     end
     it "should return yiaddr in json array" do
-      expect(JSON.parse(@bootp.to_json)["yiaddr"]).to eq "0.0.0.0"
+      expect(JSON.parse(@bootp.to_json)["yiaddr"]['address']).to eq "0.0.0.0"
     end
     it "should return giaddr in json array" do
-      expect(JSON.parse(@bootp.to_json)["giaddr"]).to eq "0.0.0.0"
+      expect(JSON.parse(@bootp.to_json)["giaddr"]['address']).to eq "0.0.0.0"
     end
     it "should return chaddr in json array" do
       expect(JSON.parse(@bootp.to_json)["chaddr"]).to eq "00:11:22:33:44:55:00:00:00:00:00:00:00:00:00:00"
