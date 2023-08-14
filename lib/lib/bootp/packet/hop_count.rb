@@ -16,8 +16,8 @@ module Lib
         def_delegators :@hops, :to_s, :to_i
 
         def initialize(hops=0)
-          raise ArgumentError, "Hop Count out of range: #{hops}" if hops > 255
-          @hops = hops
+          @hops = hops.to_i #.is_a?(Hash) ? hops.transform_keys(&:to_sym)[:code].to_i : hops.to_i
+          raise ArgumentError, "Hop Count out of range: #{@hops}" if @hops > 255
         end
 
         def <=>(other)

@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
 
-  spec.add_dependency 'net-address', '~> 0.2.1'
+  spec.add_dependency 'net-address', '~> 0.2.2'
 
   spec.required_ruby_version = '>= 3.0.0'
 end

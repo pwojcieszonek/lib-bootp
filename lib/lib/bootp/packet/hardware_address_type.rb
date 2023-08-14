@@ -16,8 +16,8 @@ module Lib
         def_delegator :@htype, :to_i
 
         def initialize(htype=1)
-          raise ArgumentError, "Hardware address type out of range : #{htype}" unless (0..12).include? htype
-          @htype = htype
+          @htype = htype.is_a?(Hash) ? htype.transform_keys(&:to_sym)[:code].to_i : htype
+          raise ArgumentError, "Hardware address type out of range : #{@htype}" unless (0..12).include? @htype
         end
 
         def to_s

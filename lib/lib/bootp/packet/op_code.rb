@@ -17,8 +17,8 @@ module Lib
         def_delegator :@op, :to_i
 
         def initialize(op=1)
-          raise ArgumentError, "OP Code out of range : #{op}" unless [1,2].include? op.to_i
-          @op = op
+          @op = op.is_a?(Hash) ? op.transform_keys(&:to_sym)[:code].to_i : op
+          raise ArgumentError, "OP Code out of range : #{@op}" unless [1,2].include? @op.to_i
         end
 
         def to_s

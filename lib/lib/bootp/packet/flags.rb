@@ -18,8 +18,8 @@ module Lib
         def initialize(flags=0)
           @flags = {}
           @flag = 0
-          if flags.is_a? Integer
-            case flags
+          if flags.is_a? Integer or flags.is_a? String
+            case flags.to_i
               when 0x8000
                 @flags[:b] = 1
                 @flag = 0x8000

@@ -17,10 +17,10 @@ module Lib
 
         def initialize(xid = nil)
           xid = generate if xid.nil?
-          unless xid >= 0 && xid <= 0xFFFFFFFF
-            raise ArgumentError, "Not valid XID - #{xid} - should by 4 octet length"
+          @xid = xid.to_i
+          unless @xid >= 0 && @xid <= 0xFFFFFFFF
+            raise ArgumentError, "Not valid XID - #{@xid} - should by 4 octet length"
           end
-          @xid = xid
         end
 
         def <=>(other)
