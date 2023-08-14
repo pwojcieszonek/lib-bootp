@@ -36,86 +36,85 @@ module Lib
       hash_attr_reader :packets, :op, :htype, :hlen, :hops, :xid, :secs, :flags, :ciaddr, :yiaddr, :siaddr, :giaddr, :chaddr, :sname, :file
 
       def initialize(op: 1, htype: 1, hlen: 6, hops: 0, xid: nil, secs: 0, flags: 0, ciaddr: 0, yiaddr: 0, siaddr: 0, giaddr: 0, chaddr: nil, sname: '.', file: '.')
-        @packets = {}
         if block_given?
           yield self
         else
-          @packets[:op]     = (op.is_a? Lib::BOOTP::Packet::OpCode) ? op : Lib::BOOTP::Packet::OpCode.new(op)
-          @packets[:htype]  = (htype.is_a? Lib::BOOTP::Packet::HardwareAddressType) ? htype : Lib::BOOTP::Packet::HardwareAddressType.new(htype)
-          @packets[:hlen]   = (hlen.is_a? Lib::BOOTP::Packet::HardwareAddressLength) ? hlen : Lib::BOOTP::Packet::HardwareAddressLength.new(hlen)
-          @packets[:hops]   = (hops.is_a? Lib::BOOTP::Packet::HopCount) ? hops : Lib::BOOTP::Packet::HopCount.new(hops)
-          @packets[:xid]    = (xid.is_a? Lib::BOOTP::Packet::TransactionID) ? xid : Lib::BOOTP::Packet::TransactionID.new(xid)
-          @packets[:secs]   = (secs.is_a? Lib::BOOTP::Packet::Seconds) ? secs : Lib::BOOTP::Packet::Seconds.new(secs)
-          @packets[:flags]  = (flags.is_a? Lib::BOOTP::Packet::Flags) ? flags : Lib::BOOTP::Packet::Flags.new(flags)
-          @packets[:ciaddr] = (ciaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? ciaddr : Lib::BOOTP::Packet::IPAddress.new(ciaddr)
-          @packets[:yiaddr] = (yiaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? yiaddr : Lib::BOOTP::Packet::IPAddress.new(yiaddr)
-          @packets[:siaddr] = (siaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? siaddr : Lib::BOOTP::Packet::IPAddress.new(siaddr)
-          @packets[:giaddr] = (giaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? giaddr : Lib::BOOTP::Packet::IPAddress.new(giaddr)
-          @packets[:chaddr] = (chaddr.is_a? Lib::BOOTP::Packet::ClientHardwareAddress) ? chaddr : Lib::BOOTP::Packet::ClientHardwareAddress.new(chaddr)
-          @packets[:sname]  = (sname.is_a? Lib::BOOTP::Packet::ServerHostName) ? sname : Lib::BOOTP::Packet::ServerHostName.new(sname)
-          @packets[:file]   = (file.is_a? Lib::BOOTP::Packet::BootFile) ? file : Lib::BOOTP::Packet::BootFile.new(file)
+          packets[:op]     = (op.is_a? Lib::BOOTP::Packet::OpCode) ? op : Lib::BOOTP::Packet::OpCode.new(op)
+          packets[:htype]  = (htype.is_a? Lib::BOOTP::Packet::HardwareAddressType) ? htype : Lib::BOOTP::Packet::HardwareAddressType.new(htype)
+          packets[:hlen]   = (hlen.is_a? Lib::BOOTP::Packet::HardwareAddressLength) ? hlen : Lib::BOOTP::Packet::HardwareAddressLength.new(hlen)
+          packets[:hops]   = (hops.is_a? Lib::BOOTP::Packet::HopCount) ? hops : Lib::BOOTP::Packet::HopCount.new(hops)
+          packets[:xid]    = (xid.is_a? Lib::BOOTP::Packet::TransactionID) ? xid : Lib::BOOTP::Packet::TransactionID.new(xid)
+          packets[:secs]   = (secs.is_a? Lib::BOOTP::Packet::Seconds) ? secs : Lib::BOOTP::Packet::Seconds.new(secs)
+          packets[:flags]  = (flags.is_a? Lib::BOOTP::Packet::Flags) ? flags : Lib::BOOTP::Packet::Flags.new(flags)
+          packets[:ciaddr] = (ciaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? ciaddr : Lib::BOOTP::Packet::IPAddress.new(ciaddr)
+          packets[:yiaddr] = (yiaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? yiaddr : Lib::BOOTP::Packet::IPAddress.new(yiaddr)
+          packets[:siaddr] = (siaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? siaddr : Lib::BOOTP::Packet::IPAddress.new(siaddr)
+          packets[:giaddr] = (giaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? giaddr : Lib::BOOTP::Packet::IPAddress.new(giaddr)
+          packets[:chaddr] = (chaddr.is_a? Lib::BOOTP::Packet::ClientHardwareAddress) ? chaddr : Lib::BOOTP::Packet::ClientHardwareAddress.new(chaddr)
+          packets[:sname]  = (sname.is_a? Lib::BOOTP::Packet::ServerHostName) ? sname : Lib::BOOTP::Packet::ServerHostName.new(sname)
+          packets[:file]   = (file.is_a? Lib::BOOTP::Packet::BootFile) ? file : Lib::BOOTP::Packet::BootFile.new(file)
         end
       end
 
       def op=(op)
-        @packets[:op] = (op.is_a? Lib::BOOTP::Packet::OpCode) ? op : Lib::BOOTP::Packet::OpCode.new(op)
+        packets[:op] = (op.is_a? Lib::BOOTP::Packet::OpCode) ? op : Lib::BOOTP::Packet::OpCode.new(op)
       end
 
       def htype=(htype)
-        @packets[:htype] = (htype.is_a? Lib::BOOTP::Packet::HardwareAddressType) ? htype : Lib::BOOTP::Packet::HardwareAddressType.new(htype)
+        packets[:htype] = (htype.is_a? Lib::BOOTP::Packet::HardwareAddressType) ? htype : Lib::BOOTP::Packet::HardwareAddressType.new(htype)
       end
 
       def hlen=(hlen)
-        @packets[:hlen] = (hlen.is_a? Lib::BOOTP::Packet::HardwareAddressLength) ? hlen : Lib::BOOTP::Packet::HardwareAddressLength.new(hlen)
+        packets[:hlen] = (hlen.is_a? Lib::BOOTP::Packet::HardwareAddressLength) ? hlen : Lib::BOOTP::Packet::HardwareAddressLength.new(hlen)
       end
 
       def hops=(hops)
-        @packets[:hops] = (hops.is_a? Lib::BOOTP::Packet::HopCount) ? hops : Lib::BOOTP::Packet::HopCount.new(hops)
+        packets[:hops] = (hops.is_a? Lib::BOOTP::Packet::HopCount) ? hops : Lib::BOOTP::Packet::HopCount.new(hops)
       end
 
       def xid=(xid)
-        @packets[:xid] = (xid.is_a? Lib::BOOTP::Packet::TransactionID) ? xid : Lib::BOOTP::Packet::TransactionID.new(xid)
+        packets[:xid] = (xid.is_a? Lib::BOOTP::Packet::TransactionID) ? xid : Lib::BOOTP::Packet::TransactionID.new(xid)
       end
 
       def secs=(secs)
-        @packets[:secs] = (secs.is_a? Lib::BOOTP::Packet::Seconds) ? secs : Lib::BOOTP::Packet::Seconds.new(secs)
+        packets[:secs] = (secs.is_a? Lib::BOOTP::Packet::Seconds) ? secs : Lib::BOOTP::Packet::Seconds.new(secs)
       end
 
       def flags=(flags)
-        @packets[:flags] = (flags.is_a? Lib::BOOTP::Packet::Flags) ? flags : Lib::BOOTP::Packet::Flags.new(flags)
+        packets[:flags] = (flags.is_a? Lib::BOOTP::Packet::Flags) ? flags : Lib::BOOTP::Packet::Flags.new(flags)
       end
 
       def ciaddr=(ciaddr)
-        @packets[:ciaddr] = (ciaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? ciaddr : Lib::BOOTP::Packet::IPAddress.new(ciaddr)
+        packets[:ciaddr] = (ciaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? ciaddr : Lib::BOOTP::Packet::IPAddress.new(ciaddr)
       end
 
       def yiaddr=(yiaddr)
-        @packets[:yiaddr] = (yiaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? yiaddr : Lib::BOOTP::Packet::IPAddress.new(yiaddr)
+        packets[:yiaddr] = (yiaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? yiaddr : Lib::BOOTP::Packet::IPAddress.new(yiaddr)
       end
 
       def siaddr=(siaddr)
-        @packets[:siaddr] = (siaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? siaddr : Lib::BOOTP::Packet::IPAddress.new(siaddr)
+        packets[:siaddr] = (siaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? siaddr : Lib::BOOTP::Packet::IPAddress.new(siaddr)
       end
 
       def giaddr=(giaddr)
-        @packets[:giaddr] = (giaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? giaddr : Lib::BOOTP::Packet::IPAddress.new(giaddr)
+        packets[:giaddr] = (giaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? giaddr : Lib::BOOTP::Packet::IPAddress.new(giaddr)
       end
 
       def chaddr=(chaddr)
-        @packets[:chaddr] = (chaddr.is_a? Lib::BOOTP::Packet::ClientHardwareAddress) ? chaddr : Lib::BOOTP::Packet::ClientHardwareAddress.new(chaddr)
+        packets[:chaddr] = (chaddr.is_a? Lib::BOOTP::Packet::ClientHardwareAddress) ? chaddr : Lib::BOOTP::Packet::ClientHardwareAddress.new(chaddr)
       end
 
       def sname=(sname)
-        @packets[:sname] = (sname.is_a? Lib::BOOTP::Packet::ServerHostName) ? sname : Lib::BOOTP::Packet::ServerHostName.new(sname)
+        packets[:sname] = (sname.is_a? Lib::BOOTP::Packet::ServerHostName) ? sname : Lib::BOOTP::Packet::ServerHostName.new(sname)
       end
 
       def file=(file)
-        @packets[:file] = (file.is_a? Lib::BOOTP::Packet::BootFile) ? file : Lib::BOOTP::Packet::BootFile.new(file)
+        packets[:file] = (file.is_a? Lib::BOOTP::Packet::BootFile) ? file : Lib::BOOTP::Packet::BootFile.new(file)
       end
 
 
       def to_h
-        @packets
+        packets
       end
 
       def to_s
@@ -183,6 +182,12 @@ module Lib
             p.send("#{k}=".to_sym, v) rescue NoMethodError
           end
         end
+      end
+
+      protected
+
+      def packets
+        @packets ||= {}
       end
 
     end
