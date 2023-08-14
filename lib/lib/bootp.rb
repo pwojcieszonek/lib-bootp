@@ -173,8 +173,8 @@ module Lib
       end
 
       def self.from_json(json)
-        json = JSON.parse json
-        Lib::BOOTP::Packet.new(
+        json = json.is_a?(Hash) ? json: JSON.parse(json)
+        self.new(
           op: json['op']['code'].to_i,
           htype: json['htype']['code'].to_i,
           hlen: json['hlen'].to_i,
@@ -182,13 +182,13 @@ module Lib
           xid: json['xid'].to_i,
           secs: json['secs'].to_i,
           flags: json['flags'].to_i,
-          ciaddr: json['ciaddr']['address'],
-          yiaddr: json['yiaddr']['address'],
-          siaddr: json['siaddr']['address'],
-          giaddr: json['giaddr']['address'],
-          chaddr: json['chaddr'],
-          sname: json['sname'],
-          file: json['file']
+          ciaddr: json['ciaddr']['address'].to_s,
+          yiaddr: json['yiaddr']['address'].to_s,
+          siaddr: json['siaddr']['address'].to_s,
+          giaddr: json['giaddr']['address'].to_s,
+          chaddr: json['chaddr'].to_s,
+          sname: json['sname'].to_s,
+          file: json['file'].to_s
         )
       end
 
