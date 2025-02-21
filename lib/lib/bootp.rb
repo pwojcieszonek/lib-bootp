@@ -36,24 +36,21 @@ module Lib
       hash_attr_reader :packets, :op, :htype, :hlen, :hops, :xid, :secs, :flags, :ciaddr, :yiaddr, :siaddr, :giaddr, :chaddr, :sname, :file
 
       def initialize(op: 1, htype: 1, hlen: 6, hops: 0, xid: nil, secs: 0, flags: 0, ciaddr: 0, yiaddr: 0, siaddr: 0, giaddr: 0, chaddr: nil, sname: '.', file: '.')
-        if block_given?
-          yield self
-        else
-          packets[:op]     = (op.is_a? Lib::BOOTP::Packet::OpCode) ? op : Lib::BOOTP::Packet::OpCode.new(op)
-          packets[:htype]  = (htype.is_a? Lib::BOOTP::Packet::HardwareAddressType) ? htype : Lib::BOOTP::Packet::HardwareAddressType.new(htype)
-          packets[:hlen]   = (hlen.is_a? Lib::BOOTP::Packet::HardwareAddressLength) ? hlen : Lib::BOOTP::Packet::HardwareAddressLength.new(hlen)
-          packets[:hops]   = (hops.is_a? Lib::BOOTP::Packet::HopCount) ? hops : Lib::BOOTP::Packet::HopCount.new(hops)
-          packets[:xid]    = (xid.is_a? Lib::BOOTP::Packet::TransactionID) ? xid : Lib::BOOTP::Packet::TransactionID.new(xid)
-          packets[:secs]   = (secs.is_a? Lib::BOOTP::Packet::Seconds) ? secs : Lib::BOOTP::Packet::Seconds.new(secs)
-          packets[:flags]  = (flags.is_a? Lib::BOOTP::Packet::Flags) ? flags : Lib::BOOTP::Packet::Flags.new(flags)
-          packets[:ciaddr] = (ciaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? ciaddr : Lib::BOOTP::Packet::IPAddress.new(ciaddr)
-          packets[:yiaddr] = (yiaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? yiaddr : Lib::BOOTP::Packet::IPAddress.new(yiaddr)
-          packets[:siaddr] = (siaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? siaddr : Lib::BOOTP::Packet::IPAddress.new(siaddr)
-          packets[:giaddr] = (giaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? giaddr : Lib::BOOTP::Packet::IPAddress.new(giaddr)
-          packets[:chaddr] = (chaddr.is_a? Lib::BOOTP::Packet::ClientHardwareAddress) ? chaddr : Lib::BOOTP::Packet::ClientHardwareAddress.new(chaddr)
-          packets[:sname]  = (sname.is_a? Lib::BOOTP::Packet::ServerHostName) ? sname : Lib::BOOTP::Packet::ServerHostName.new(sname)
-          packets[:file]   = (file.is_a? Lib::BOOTP::Packet::BootFile) ? file : Lib::BOOTP::Packet::BootFile.new(file)
-        end
+        packets[:op]     = (op.is_a? Lib::BOOTP::Packet::OpCode) ? op : Lib::BOOTP::Packet::OpCode.new(op)
+        packets[:htype]  = (htype.is_a? Lib::BOOTP::Packet::HardwareAddressType) ? htype : Lib::BOOTP::Packet::HardwareAddressType.new(htype)
+        packets[:hlen]   = (hlen.is_a? Lib::BOOTP::Packet::HardwareAddressLength) ? hlen : Lib::BOOTP::Packet::HardwareAddressLength.new(hlen)
+        packets[:hops]   = (hops.is_a? Lib::BOOTP::Packet::HopCount) ? hops : Lib::BOOTP::Packet::HopCount.new(hops)
+        packets[:xid]    = (xid.is_a? Lib::BOOTP::Packet::TransactionID) ? xid : Lib::BOOTP::Packet::TransactionID.new(xid)
+        packets[:secs]   = (secs.is_a? Lib::BOOTP::Packet::Seconds) ? secs : Lib::BOOTP::Packet::Seconds.new(secs)
+        packets[:flags]  = (flags.is_a? Lib::BOOTP::Packet::Flags) ? flags : Lib::BOOTP::Packet::Flags.new(flags)
+        packets[:ciaddr] = (ciaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? ciaddr : Lib::BOOTP::Packet::IPAddress.new(ciaddr)
+        packets[:yiaddr] = (yiaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? yiaddr : Lib::BOOTP::Packet::IPAddress.new(yiaddr)
+        packets[:siaddr] = (siaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? siaddr : Lib::BOOTP::Packet::IPAddress.new(siaddr)
+        packets[:giaddr] = (giaddr.is_a? Lib::BOOTP::Packet::IPAddress) ? giaddr : Lib::BOOTP::Packet::IPAddress.new(giaddr)
+        packets[:chaddr] = (chaddr.is_a? Lib::BOOTP::Packet::ClientHardwareAddress) ? chaddr : Lib::BOOTP::Packet::ClientHardwareAddress.new(chaddr)
+        packets[:sname]  = (sname.is_a? Lib::BOOTP::Packet::ServerHostName) ? sname : Lib::BOOTP::Packet::ServerHostName.new(sname)
+        packets[:file]   = (file.is_a? Lib::BOOTP::Packet::BootFile) ? file : Lib::BOOTP::Packet::BootFile.new(file)
+        yield self if block_given?
       end
 
       def op=(op)
@@ -176,10 +173,10 @@ module Lib
       end
 
       def self.from_json(json)
-        json = json.is_a?(Hash) ? json: JSON.parse(json)
+        json = json.is_a?(Hash) ? JSON.parse(json.to_json, symbolize_names: true) : JSON.parse(json, symbolize_names: true)
         self.new do |p|
           json.each_pair do |k,v|
-            p.send("#{k}=".to_sym, v) rescue NoMethodError
+            p.send("#{k}=".to_sym, v) unless k == :options
           end
         end
       end
